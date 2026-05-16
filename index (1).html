@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Aera — Sign In</title>
+  <link rel="stylesheet" href="login.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+</head>
+<body>
+
+  <!-- Ambient background shapes -->
+  <div class="bg-wrap">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    <div class="grid-lines"></div>
+  </div>
+
+  <!-- Floating clouds / planes decoration -->
+  <div class="deco-plane">✈</div>
+
+  <main class="card-wrap">
+    <div class="card" id="authCard">
+
+      <!-- LOGO -->
+      <div class="logo-area">
+        <div class="logo-img-wrap" id="logoWrap">
+          <!-- If user provides logo image, it will appear here -->
+          <img src="main_logo.jpg" alt="Aera Logo"/>
+        </div>
+        <span class="brand">AERA</span>
+        <p class="tagline" id="tagline">Welcome back. The sky awaits.</p>
+      </div>
+
+      <!-- TAB SWITCHER -->
+      <div class="tab-bar">
+        <button class="tab active" id="tabLogin" onclick="showLogin()">Sign In</button>
+        <button class="tab" id="tabSignup" onclick="showSignup()">Create Account</button>
+        <div class="tab-indicator" id="tabIndicator"></div>
+      </div>
+
+      <!-- ─── LOGIN FORM ─── -->
+      <form class="form active" id="loginForm" novalidate onsubmit="handleLogin(event)">
+        <div class="field-group">
+          <div class="field">
+            <label>Email</label>
+            <div class="input-wrap">
+              <span class="icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+              </span>
+              <input type="text" placeholder="your@email.com" id="loginEmail" autocomplete="username" />
+            </div>
+          </div>
+          <div class="field">
+            <label>Password</label>
+            <div class="input-wrap">
+              <span class="icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              </span>
+              <input type="password" placeholder="••••••••" id="loginPassword" autocomplete="current-password" />
+              <button type="button" class="eye-btn" onclick="togglePass('loginPassword',this)">
+                <svg class="eye-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="form-footer-row">
+          <label class="remember">
+            <input type="checkbox" id="rememberMe"/> <span>Remember me</span>
+          </label>
+          <a href="#" class="forgot">Forgot password?</a>
+        </div>
+        <button type="submit" class="btn-primary">
+          <span>Sign In</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+        <p class="switch-msg">Don't have an account? <a href="#" onclick="showSignup();return false;">Create one</a></p>
+      </form>
+
+      <!-- ─── SIGNUP FORM ─── -->
+      <form class="form" id="signupForm" novalidate onsubmit="handleSignup(event)">
+        <div class="field-group two-col">
+          <div class="field">
+            <label>First Name</label>
+            <div class="input-wrap">
+              <span class="icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+              </span>
+              <input type="text" placeholder="First name" id="signupFirst" autocomplete="given-name"/>
+            </div>
+          </div>
+          <div class="field">
+            <label>Last Name</label>
+            <div class="input-wrap">
+              <span class="icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+              </span>
+              <input type="text" placeholder="Last name" id="signupLast" autocomplete="family-name"/>
+            </div>
+          </div>
+        </div>
+        <div class="field-group">
+          <div class="field">
+            <label>Username</label>
+            <div class="input-wrap">
+              <span class="icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              </span>
+              <input type="text" placeholder="@username" id="signupUsername" autocomplete="username"/>
+            </div>
+          </div>
+          <div class="field">
+            <label>Email Address</label>
+            <div class="input-wrap">
+              <span class="icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 7L2 7"/></svg>
+              </span>
+              <input type="email" placeholder="your@email.com" id="signupEmail" autocomplete="email"/>
+            </div>
+          </div>
+          <div class="field">
+            <label>Phone Number</label>
+            <div class="input-wrap">
+              <span class="icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 1.8 19.8 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.14 12a19.8 19.8 0 0 1-3.07-8.67A2 2 0 0 1 3.05 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21 17z"/></svg>
+              </span>
+              <input type="tel" placeholder="+1 (555) 000-0000" id="signupPhone" autocomplete="tel"/>
+            </div>
+          </div>
+          <div class="field">
+            <label>Password</label>
+            <div class="input-wrap">
+              <span class="icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              </span>
+              <input type="password" placeholder="Min. 8 characters" id="signupPass" autocomplete="new-password" oninput="checkStrength(this.value)"/>
+              <button type="button" class="eye-btn" onclick="togglePass('signupPass',this)">
+                <svg class="eye-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+              </button>
+            </div>
+            <div class="strength-bar" id="strengthBar">
+              <div class="strength-fill" id="strengthFill"></div>
+            </div>
+            <span class="strength-label" id="strengthLabel"></span>
+          </div>
+          <div class="field">
+            <label>Confirm Password</label>
+            <div class="input-wrap">
+              <span class="icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 12l2 2 4-4m6 2a9 9 0 1 1-18 0 9 9 0 0 1 18 0z"/></svg>
+              </span>
+              <input type="password" placeholder="Repeat password" id="signupConfirm" autocomplete="new-password"/>
+              <button type="button" class="eye-btn" onclick="togglePass('signupConfirm',this)">
+                <svg class="eye-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+        <label class="terms-check">
+          <input type="checkbox" id="agreeTerms"/>
+          <span>I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></span>
+        </label>
+        <button type="submit" class="btn-primary">
+          <span>Create My Account</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+        <p class="switch-msg">Already have an account? <a href="#" onclick="showLogin();return false;">Sign in</a></p>
+      </form>
+
+      <!-- SUCCESS OVERLAY -->
+      <div class="success-overlay" id="successOverlay">
+        <div class="success-icon">✦</div>
+        <h2 id="successTitle">Welcome aboard.</h2>
+        <p id="successMsg">You're all set. Let's find your next adventure.</p>
+        <button class="btn-primary" onclick="closeSuccess()" style="margin-top:1.5rem">Continue to Aera</button>
+      </div>
+
+    </div>
+  </main>
+
+  <script type="module" src="firebase.js"></script>
+  <script type="module" src="login.js"></script>
+</body>
+</html>
